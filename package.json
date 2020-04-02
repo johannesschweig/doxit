@@ -3,17 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "bufferutil": "^4.0.1",
     "core-js": "^3.6.4",
+    "express": "^4.17.1",
+    "utf-8-validate": "^5.0.2",
     "vue": "^2.6.11",
+    "vue-native-websocket": "^2.0.14",
     "vue-router": "^3.1.5",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "ws": "^7.2.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.2.0",
