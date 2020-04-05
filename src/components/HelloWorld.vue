@@ -1,19 +1,20 @@
 <template>
   <div class="hello">
     <h1>Doxit</h1>
-<button @click="disconnect" v-if="status === 'connected'">Disconnect</button>
-  <button @click="connect" v-if="status === 'disconnected'">Connect</button> {{ status }}
-  <br /><br />
-  <div v-if="status === 'connected'">
-    <form @submit.prevent="sendMessage" action="#">
-      <input v-model="message"><button type="submit">Send Message</button>
-    </form>
-    <ul id="logs">
-      <li v-for="log in logs" class="log">
-        {{ log.event }}: {{ log.data }}
-      </li>
-    </ul>
-  </div>
+    <h2>Players in queue</h2>
+    <p>Wait for 4 players to join</p>
+    <div
+      v-for='(client, index) in clients'
+      :class='["user", { "active": id === client }]'
+      :key='client'>
+      Player {{ index + 1 }}
+    </div>
+    <button @click='startGame'>Start Game</button>
+    <div
+      id='canvas'
+      v-if='gameStatus !== "Waiting"'>
+      xxo
+    </div>
   </div>
 </template>
 
@@ -25,10 +26,13 @@ export default {
   },
   data() {
     return {
-      message: "",
+      id: null,
+      clients: [],
       logs: [],
+      gameStatus: 'Waiting',
       status: "disconnected",
-      ws: 'wss://doxit-websocket.herokuapp.com'
+      // ws: 'wss://doxit-websocket.herokuapp.com'
+      ws: 'ws://localhost:1234'
     }
   },
   methods: {
@@ -37,10 +41,20 @@ export default {
       this.socket.onopen = () => {
         this.status = "connected";
         this.logs.push({ event: "Connected to", data: this.ws})
+        console.log('Connected to', this.ws)
         
 
         this.socket.onmessage = ({data}) => {
           this.logs.push({ event: "Recieved message", data });
+          console.log('Recieved message', data)
+          let json = JSON.parse(data)
+          if (json.hasOwnProperty('ID')) {
+            this.id = json['ID']
+          } else if (json.hasOwnProperty('clients')) {
+            this.clients = json['clients']
+          } else if (json.hasOwnProperty('start-game')) {
+            this.gameStatus = 'Start'
+          }
         };
       };
     },
@@ -49,17 +63,33 @@ export default {
       this.status = "disconnected";
       this.logs = [];
     },
-    sendMessage(e) {
-      this.socket.send(this.message);
-      this.logs.push({ event: "Sent message", data: this.message });
-      this.message = "";
+    sendMessage(msg) {
+      this.socket.send(msg);
+      this.logs.push({ event: "Sent message", data: msg });
+      console.log('Sent message', msg)
+    },
+    startGame() {
+      this.gameStatus = 'Start'
+      this.sendMessage(JSON.stringify({ 'start-game': true }))
     }
   },
   created() {
+    this.connect()
   }
 }
 </script>
 
 <style scoped>
+.user {
+  background-color: #ccc;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+}
 
+.user.active {
+  background-color: blue;
+  font-weight: bold;
+  color: white;
+}
 </style>
