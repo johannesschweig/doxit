@@ -28,7 +28,7 @@ export default {
       message: "",
       logs: [],
       status: "disconnected",
-      ws: 'ws://localhost:8081'//"wss://echo.websocket.org"
+      ws: 'wss://doxit-websocket.herokuapp.com'
     }
   },
   methods: {
