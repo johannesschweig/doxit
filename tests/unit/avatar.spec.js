@@ -39,6 +39,6 @@ describe('Avatar.vue', () => {
         points: 10
       }
     })
-    expect(wrapper.find('.user').text()).toBe('foo Pt: 10')
+    expect(wrapper.find('.user').text()).toBe('foo  Pt: 10')
   })
 })

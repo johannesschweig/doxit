@@ -1,23 +1,22 @@
 <template>
-  <div class="hello">
+  <div>
     <h1>Doxit</h1>
     <div class='players'>
       <Avatar
         v-for='(client, index) in getClientsWithGhosts'
         :name='client === "" ? "" : "Player " + (index + 1)'
         :active='id === client'
-        :key='client'>
-        Player {{ index + 1 }}
+        :key='index'>
       </Avatar>
     </div>
     <div>
-      <p>Wait for 4 players to join</p>
-      <button @click='startGame'>Start Game</button>
-    </div>
-    <div
-      id='canvas'
-      v-if='gameStatus !== "Waiting"'>
-      xxo
+      <router-link to='/board'>
+        <button
+          :disabled='gameStatus === "Waiting"'
+          @click='startGame'>
+          Start Game
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -28,7 +27,7 @@ import Avatar from './Avatar'
 export default {
   name: 'Lobby',
   components: {
-    'Avatar': Avatar
+    Avatar
   },
   props: {
     msg: String
@@ -40,6 +39,7 @@ export default {
       clients: ['1', '2'],
       logs: [],
       gameStatus: 'Waiting',
+      // gameStatus: 'Ready',
       status: "disconnected",
       // ws: 'wss://doxit-websocket.herokuapp.com'
       ws: 'ws://localhost:1234'
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     getClientsWithGhosts() {
-      return this.clients.concat(Array(4 - this.clients.length).fill(''))
+      return this.clients.concat(Array(3 - this.clients.length).fill(''))
     }
   },
   methods: {
@@ -85,7 +85,7 @@ export default {
     },
     startGame() {
       this.gameStatus = 'Start'
-      this.sendMessage(JSON.stringify({ 'start-game': true }))
+      // this.sendMessage(JSON.stringify({ 'start-game': true }))
     }
   },
   created() {
@@ -97,5 +97,12 @@ export default {
 <style scoped>
 .players > * {
   margin: 0 12px;
+}
+
+button {
+  margin-top: 32px;
+  width: 150px;
+  height: 48px;
+  font-size: 20px;
 }
 </style>

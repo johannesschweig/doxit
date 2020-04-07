@@ -6,14 +6,11 @@
 - Correct guess on narrator card: 3 points
 - tricked somebody: 1 point each
 ## Components 
-- Lobby
-    - Player/Ghost
+- Lobby (done)
+    - Player/Ghost/Narrator (done)
 - Board
     - Hand
-    - Narrator
-    - (Player)
     - Status (center)
-    - (CardWithClue)
 - BigCards (with selection) (with text)
 - CardWithClue
 - CardStack (1-6) (Reveal)

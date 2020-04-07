@@ -8,6 +8,7 @@
       v-else
       :class='["user", { "active": active }]'>
         <div>{{ name }}</div>
+        <div v-if='narrator'>(N)</div>
         <div v-if='points'>Pt: {{ points }}</div>
     </div>
 </template>
@@ -31,6 +32,11 @@ export default {
   width: 150px;
   height: 150px;
   display: inline-block;
+}
+
+.user.small {
+  width: 100px;
+  height: 50px;
 }
 
 .user.active {
