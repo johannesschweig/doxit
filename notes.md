@@ -8,8 +8,8 @@
 ## Components 
 - Lobby (done)
     - Player/Ghost/Narrator (done)
-- Board
-    - Hand
+- Board (done)
+    - Hand (done)
     - Status (center)
 - BigCards (with selection) (with text)
 - CardWithClue

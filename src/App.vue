@@ -1,8 +1,19 @@
 <template>
   <div id="app">
+    <Nav />
     <router-view/>
   </div>
 </template>
+
+<script>
+import Nav from './components/Nav'
+
+export default {
+  components: {
+    Nav
+  }
+}
+</script>
 
 <style>
 #app {
@@ -25,4 +36,19 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+button,
+input {
+  height: 48px;
+  font-size: 20px;
+}
+
+button {
+  width: 150px;
+}
+
+input {
+  width: 250px;
+}
+
 </style>

@@ -1,20 +1,20 @@
 <template>
   <div>
-    <h1>Board</h1>
+    <h1>Spielbrett</h1>
     <div class='players'>
       <Avatar
         v-for='(client, index) in getClientsWithoutPlayer'
-        :name='"Player " + client'
+        :name='"Spieler " + client'
         :narrator='client === narrator'
         class='small'
         :key='index' />
     </div>
-    <div id='status'>Player 1 picks a card</div>
+    <div id='status'>Spieler 1 wählt eine Karte aus</div>
     <div id='hand'>
       <Avatar
-        :name='"Player " + id'
+        :name='"Spieler " + id'
         class='small'
-        :key='index' />
+        :key='id' />
       <Hand />
     </div>
   </div>   

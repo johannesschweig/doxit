@@ -1,29 +1,25 @@
 <template>
-  <div>
-    <div
+  <router-link to='/big-cards'>
+    <Card
       v-for='card in cards'
-      class='card'
-      :key='card'>
-    </div>
-  </div>
+      :card='card'
+      class='small'
+      :key='card' />
+  </router-link>
 </template>
 
 <script>
+import Card from './Card'
+
 export default {
+  components: {
+    Card,
+  },
   data() {
     return {
-      cards: [1, 2, 3, 4]
+      cards: [ '079', '059', '026', '076', '032', '017' ]
     }
   }
 }
 </script>
 
-<style scoped>
-.card {
-  display: inline-block;
-  background-color: #ccc;
-  width: 200px;
-  height: 100px;
-  margin: 0 10px;
-}
-</style>

@@ -4,7 +4,7 @@
     <div class='players'>
       <Avatar
         v-for='(client, index) in getClientsWithGhosts'
-        :name='client === "" ? "" : "Player " + (index + 1)'
+        :name='client === "" ? "" : "Spieler " + (index + 1)'
         :active='id === client'
         :key='index'>
       </Avatar>
@@ -14,7 +14,7 @@
         <button
           :disabled='gameStatus === "Waiting"'
           @click='startGame'>
-          Start Game
+          Starten 
         </button>
       </router-link>
     </div>
@@ -101,8 +101,5 @@ export default {
 
 button {
   margin-top: 32px;
-  width: 150px;
-  height: 48px;
-  font-size: 20px;
 }
 </style>

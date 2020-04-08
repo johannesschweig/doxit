@@ -2,13 +2,13 @@
     <div
       v-if='name === ""'
       class='user ghost'>
-      Free seat
+      Freier Platz
     </div>
     <div
       v-else
       :class='["user", { "active": active }]'>
         <div>{{ name }}</div>
-        <div v-if='narrator'>(N)</div>
+        <div v-if='narrator'>(EZ)</div>
         <div v-if='points'>Pt: {{ points }}</div>
     </div>
 </template>
